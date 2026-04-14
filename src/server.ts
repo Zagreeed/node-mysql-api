@@ -3,6 +3,7 @@ import cors from "cors"
 import { errorHandler } from "./middleware/errorHandler"
 import { initialize } from "./_helpers/db"
 import userController from "./users/users.controller"
+import swaggerRouter from "./_helpers/swagger"
 
 const app: Application = express()
 
@@ -11,7 +12,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
-
+app.use("/api-docs", swaggerRouter) 
 app.use("/users", userController)
 
 app.use(errorHandler)
