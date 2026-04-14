@@ -1,0 +1,19 @@
+{
+    "database": {
+      "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "password": "",
+        "database": "node_mysql_api"
+    },
+    "Secret": "DANLEY_YAP_GALAN_2004_3_31",
+    "emailform": "info@my-node-api.com",
+    "smtOptions": {
+        "host": "smpt.ethereal.email",
+        "port": 587, 
+        "auth": {
+            "user": "",
+            "pass": ""
+        }
+    }
+}
