@@ -5,6 +5,7 @@ import { Sequelize } from "sequelize"
 
 export interface Database {
     User: any;
+    Account: any;
 }
 
 
@@ -27,8 +28,10 @@ export async function initialize(): Promise<void> {
 
 
     const { default: userModel } = await import("../users/user.model")
+    const { default: accountModel } = await import("../accounts/account.model")
 
     db.User = userModel(sequelize)
+    db.User = accountModel(sequelize)
 
 
     await sequelize.sync({ alter: true })

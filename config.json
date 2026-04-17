@@ -1,6 +1,6 @@
 {
     "database": {
-      "host": "localhost",
+        "host": "localhost",
         "port": 3306,
         "user": "root",
         "password": "",
@@ -10,10 +10,10 @@
     "emailform": "info@my-node-api.com",
     "smtOptions": {
         "host": "smpt.ethereal.email",
-        "port": 587, 
+        "port": 587,
         "auth": {
-            "user": "",
-            "pass": ""
+            "user": "peter.kub@ethereal.email",
+            "pass": "WaP4skgZ4tyq627BUw"
         }
     }
 }
