@@ -6,6 +6,7 @@ import { Sequelize } from "sequelize"
 export interface Database {
     User: any;
     Account: any;
+    RefreshToken: any;
 }
 
 
@@ -29,10 +30,14 @@ export async function initialize(): Promise<void> {
 
     const { default: userModel } = await import("../users/user.model")
     const { default: accountModel } = await import("../accounts/account.model")
+    const { default: refreshTokenModel } = await import("../accounts/refresh-token.model")
 
     db.User = userModel(sequelize)
-    db.User = accountModel(sequelize)
+    db.Account = accountModel(sequelize)
+    db.RefreshToken = refreshTokenModel(sequelize)
 
+    db.Account.hasMany(db.RefreshToken, { onDelete: "CASCADE" })
+    db.RefreshToken.belongsTo(db.Account)
 
     await sequelize.sync({ alter: true })
 
