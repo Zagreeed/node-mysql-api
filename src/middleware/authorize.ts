@@ -12,16 +12,7 @@ export default function authorize(roles: any = []) {
     return [
         expressjwt({ secret, algorithms: ['HS256'] }),
         async (req: any, res: any, next: any) => {
-            const account = await db.Account.findByPk(req.auth.id); // <-- AFTER
-
-            // if (!account || (roles.length && !roles.includes(account.role))) {
-            //     return res.status(401).json({ message: 'Unauthorized' });
-            // }
-
-            // req.auth.role = account.role; // <-- AFTER
-            // const refreshTokens = await account.getRefreshTokens();
-            // req.user.ownsToken = (token: any) => !!refreshTokens.find((x: any) => x.token === token);
-            // next();
+            const account = await db.Account.findByPk(req.auth.id);
 
             if (!account || (roles.length && !roles.includes(account.role))) {
                 return res.status(401).json({ message: 'Unauthorized' });

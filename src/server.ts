@@ -13,7 +13,7 @@ const app: Application = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
-app.use(cookieParser())
+app.use(cookieParser()) // <-------- the change 
 
 app.use("/accounts", accountsController)
 app.use("/api-docs", swaggerRouter)
