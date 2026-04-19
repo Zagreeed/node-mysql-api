@@ -9,7 +9,7 @@
     "secret": "DANLEY_YAP_GALAN_2004_3_31",
     "emailform": "info@my-node-api.com",
     "smtOptions": {
-        "host": "smpt.ethereal.email",
+        "host": "smtp.ethereal.email",
         "port": 587,
         "auth": {
             "user": "peter.kub@ethereal.email",
