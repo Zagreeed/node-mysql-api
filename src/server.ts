@@ -10,9 +10,16 @@ import cookieParser from "cookie-parser"
 const app: Application = express()
 
 
+const corsOptions = {
+    origin: ['http://localhost:4200'],   // your Angular dev URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,   // ← VERY important! your app uses cookies for refresh tokens
+};
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(cookieParser()) // <-------- the change 
 
 app.use("/accounts", accountsController)
