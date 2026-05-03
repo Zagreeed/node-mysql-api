@@ -1,4 +1,3 @@
-
 import config from "../../config.json"
 import mysql from "mysql2/promise"
 import { Sequelize } from "sequelize"
@@ -9,24 +8,38 @@ export interface Database {
     RefreshToken: any;
 }
 
-
 export const db: Database = {} as Database;
-
 
 export async function initialize(): Promise<void> {
     const { host, port, user, password, database } = config.database
 
-    // const connection = await mysql.createConnection({ host, port, user, password })
-    // await connection.query(`CREATE DATABASE IF NOT EXISTS \'${database}'`)
+    // ↓ Add ssl to the raw mysql2 connection
+    const connection = await mysql.createConnection({
+        host,
+        port,
+        user,
+        password,
+        ssl: {
+            minVersion: 'TLSv1.2',
+            rejectUnauthorized: true
+        }
+    });
 
-    const connection = await mysql.createConnection({ host, port, user, password });
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\``);
-    await connection.end()
+    await connection.end();
 
-
-
-    const sequelize = new Sequelize(database, user, password, { dialect: "mysql" })
-
+    // ↓ Add ssl to the Sequelize connection
+    const sequelize = new Sequelize(database, user, password, {
+        host,
+        port,
+        dialect: "mysql",
+        dialectOptions: {
+            ssl: {
+                minVersion: 'TLSv1.2',
+                rejectUnauthorized: true
+            }
+        }
+    });
 
     const { default: userModel } = await import("../users/user.model")
     const { default: accountModel } = await import("../accounts/account.model")
@@ -41,7 +54,5 @@ export async function initialize(): Promise<void> {
 
     await sequelize.sync({ alter: true })
 
-
     console.log("_______DATABASE INITIALIZED AND MODELS SYNCED_______")
-
 }

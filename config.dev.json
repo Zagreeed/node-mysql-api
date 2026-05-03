@@ -1,9 +1,9 @@
 {
     "database": {
-        "host": "gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com",
-        "port": 4000,
-        "user": "2knyR3ZHX5JEhk3.root",
-        "password": "9VNV6vyO2HAouLxD",
+        "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "password": "12345678",
         "database": "node_mysql_api"
     },
     "secret": "DANLEY_YAP_GALAN_2004_3_31",
