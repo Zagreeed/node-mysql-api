@@ -1,4 +1,4 @@
-import config from "../../config.json"
+import config from "../../config.prod.json"
 import mysql from "mysql2/promise"
 import { Sequelize } from "sequelize"
 
@@ -19,11 +19,11 @@ export async function initialize(): Promise<void> {
         port,
         user,
         password,
-        /// UNCOMMENT THIS FOR PRODUCTION
-        // ssl: {
-        //     minVersion: 'TLSv1.2',
-        //     rejectUnauthorized: true
-        // }
+        /// UNCOMMENTED FOR PRODUCTION
+        ssl: {
+            minVersion: 'TLSv1.2',
+            rejectUnauthorized: true
+        }
     });
 
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\``);
@@ -34,13 +34,13 @@ export async function initialize(): Promise<void> {
         host,
         port,
         dialect: "mysql",
-        /// UNCOMMENT THIS FOR PRODUCTION
-        // dialectOptions: {
-        //     ssl: {
-        //         minVersion: 'TLSv1.2',
-        //         rejectUnauthorized: true
-        //     }
-        // }
+        /// UNCOMMENTED FOR PRODUCTION
+        dialectOptions: {
+            ssl: {
+                minVersion: 'TLSv1.2',
+                rejectUnauthorized: true
+            }
+        }
     });
 
     const { default: userModel } = await import("../users/user.model")
