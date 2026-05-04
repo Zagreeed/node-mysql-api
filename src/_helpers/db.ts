@@ -54,7 +54,7 @@ export async function initialize(): Promise<void> {
     db.Account.hasMany(db.RefreshToken, { onDelete: "CASCADE" })
     db.RefreshToken.belongsTo(db.Account)
 
-    await sequelize.sync({ alter: true })
+    await sequelize.sync()
 
     console.log("_______DATABASE INITIALIZED AND MODELS SYNCED_______")
 }
