@@ -19,10 +19,11 @@ export async function initialize(): Promise<void> {
         port,
         user,
         password,
-        ssl: {
-            minVersion: 'TLSv1.2',
-            rejectUnauthorized: true
-        }
+        /// UNCOMMENT THIS FOR PRODUCTION
+        // ssl: {
+        //     minVersion: 'TLSv1.2',
+        //     rejectUnauthorized: true
+        // }
     });
 
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\``);
@@ -33,12 +34,13 @@ export async function initialize(): Promise<void> {
         host,
         port,
         dialect: "mysql",
-        dialectOptions: {
-            ssl: {
-                minVersion: 'TLSv1.2',
-                rejectUnauthorized: true
-            }
-        }
+        /// UNCOMMENT THIS FOR PRODUCTION
+        // dialectOptions: {
+        //     ssl: {
+        //         minVersion: 'TLSv1.2',
+        //         rejectUnauthorized: true
+        //     }
+        // }
     });
 
     const { default: userModel } = await import("../users/user.model")
