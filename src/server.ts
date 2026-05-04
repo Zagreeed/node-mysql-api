@@ -11,7 +11,9 @@ const app: Application = express()
 
 
 const corsOptions = {
-    origin: ['http://localhost:4200'],   // your Angular dev URL
+    origin: [
+        'http://localhost:4200',
+        'https://galan-lab7-intprog.onrender.com'], //<-- deployed frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,   // ← VERY important! your app uses cookies for refresh tokens
