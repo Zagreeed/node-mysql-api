@@ -18,7 +18,7 @@ export default async function sendEmail({ to, subject, html, }: any) {
 
     const { data, error } = await resend.emails.send({
         from: 'onboarding@resend.dev',
-        to,
+        to: 'galandanley701254@gmail.com',
         subject,
         html
     });
