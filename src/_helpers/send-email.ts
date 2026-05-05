@@ -16,10 +16,16 @@ export default async function sendEmail({ to, subject, html, }: any) {
     // })
     // await transporter.sendMail({ from, to, subject, html })
 
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
         from: 'onboarding@resend.dev',
         to,
         subject,
         html
     });
+
+    if (error) {
+        return console.error({ error });
+    }
+
+    console.log({ data });
 }
