@@ -7,13 +7,13 @@
         "database": "node_mysql_api"
     },
     "secret": "DANLEY_YAP_GALAN_2004_3_31",
-    "emailform": "info@my-node-api.com",
+    "emailform": "galandanley701254@gmail.com",
     "smtOptions": {
-        "host": "smtp.ethereal.email",
+        "host": "smtp.gmail.com",
         "port": 587,
         "auth": {
-            "user": "adolph.balistreri@ethereal.email",
-            "pass": "pkCMdPk6YCT7c3Uyst"
+            "user": "galandanley701254@gmail.com",
+            "pass": "ykdshgufmfbjwqro"
         }
     }
 }
