@@ -1,12 +1,25 @@
 import nodemailer from "nodemailer"
 import config from "../../config.prod.json"
+import { Resend } from 'resend';
 
-export default async function sendEmail({ to, subject, html, from = config.emailform }: any) {
-    const transporter = nodemailer.createTransport({
-        ...config.smtOptions,
-        connectionTimeout: 10000,
-        greetingTimeout: 10000,
-        socketTimeout: 10000,
-    })
-    await transporter.sendMail({ from, to, subject, html })
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+
+// ADD "from = config.emailform" to the parameter for SMTP EMAIL LIKE ETHEREAL 
+export default async function sendEmail({ to, subject, html, }: any) {
+    // THE CODE BELOW ARE FOR ETHEAREAL EMAILL
+    // const transporter = nodemailer.createTransport({
+    //     ...config.smtOptions,
+    //     connectionTimeout: 10000,
+    //     greetingTimeout: 10000,
+    //     socketTimeout: 10000,
+    // })
+    // await transporter.sendMail({ from, to, subject, html })
+
+    await resend.emails.send({
+        from: 'onboarding@resend.dev',
+        to,
+        subject,
+        html
+    });
 }
