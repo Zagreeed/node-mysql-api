@@ -19,6 +19,7 @@ const corsOptions = {
     credentials: true,
 };
 
+// the changed
 app.use(cors(corsOptions))
 app.options('*', cors(corsOptions));
 
@@ -57,22 +58,38 @@ async function ensureInitialized() {
     }
 }
 
-// Wrap the app so DB initializes on first request (serverless-safe)
+// Serverless handler for Vercel
 const handler = async (req: any, res: any) => {
-    await ensureInitialized();
+    // ✅ Handle OPTIONS preflight immediately — no DB init needed
+    if (req.method === 'OPTIONS') {
+        app(req, res);
+        return;
+    }
+
+    try {
+        await ensureInitialized();
+    } catch (err) {
+        console.error('Failed to initialize database:', err);
+        res.status(503).json({ message: 'Service temporarily unavailable. Please try again later.' });
+        return;
+    }
+
     app(req, res);
 };
 
-// Local dev: still starts a real server
+// Local dev: starts a real server
 if (process.env.NODE_ENV !== 'production') {
-    initialize().then(() => {
-        app.listen(PORT, () => {
-            console.log(`SERVER IS RUNNING ON http://localhost:${PORT}`);
+    initialize()
+        .then(() => {
+            app.listen(PORT, () => {
+                console.log(`SERVER IS RUNNING ON http://localhost:${PORT}`);
+            });
+        })
+        .catch((err) => {
+            console.log(`Failed to initialize database:`, err);
+            process.exit(1);
         });
-    }).catch((err) => {
-        console.log(`Failed to initialize database:`, err);
-        process.exit(1);
-    });
 }
 
 export default handler;
+
