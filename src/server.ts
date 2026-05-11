@@ -33,12 +33,43 @@ app.use(errorHandler)
 const PORT = process.env.PORT || 4000
 
 
-initialize()
-    .then(() => {
+
+
+// initialize()
+//     .then(() => {
+//         app.listen(PORT, () => {
+//             console.log(`SERVER IS RUNNING ON http://localhost:${PORT}`)
+//         })
+//     }).catch((err) => {
+//         console.log(`Failed to initialize database::`, err)
+//         process.exit(1)
+//     })
+
+let initialized = false;
+
+async function ensureInitialized() {
+    if (!initialized) {
+        await initialize();
+        initialized = true;
+    }
+}
+
+// Wrap the app so DB initializes on first request (serverless-safe)
+const handler = async (req: any, res: any) => {
+    await ensureInitialized();
+    app(req, res);
+};
+
+// Local dev: still starts a real server
+if (process.env.NODE_ENV !== 'production') {
+    initialize().then(() => {
         app.listen(PORT, () => {
-            console.log(`SERVER IS RUNNING ON http://localhost:${PORT}`)
-        })
+            console.log(`SERVER IS RUNNING ON http://localhost:${PORT}`);
+        });
     }).catch((err) => {
-        console.log(`Failed to initialize database::`, err)
-        process.exit(1)
-    })
+        console.log(`Failed to initialize database:`, err);
+        process.exit(1);
+    });
+}
+
+export default handler;
