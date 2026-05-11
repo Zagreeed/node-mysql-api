@@ -9,11 +9,11 @@
     "secret": "DANLEY_YAP_GALAN_2004_3_31",
     "emailform": "galandanley701254@gmail.com",
     "smtOptions": {
-        "host": "smtp.gmail.com",
+        "host": "smtp.ethereal.email",
         "port": 587,
         "auth": {
-            "user": "galandanley701254@gmail.com",
-            "pass": "ykdshgufmfbjwqro"
+            "user": "brooke.witting@ethereal.email",
+            "pass": "5dNJqcCFwQrWadgJHe"
         }
     }
 }

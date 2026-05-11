@@ -16,7 +16,7 @@ const corsOptions = {
         'https://galan-lab7-intprog.onrender.com'], //<-- deployed frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,   // ← VERY important! your app uses cookies for refresh tokens
+    credentials: true,
 };
 
 app.use(express.json())
@@ -37,7 +37,6 @@ initialize()
     .then(() => {
         app.listen(PORT, () => {
             console.log(`SERVER IS RUNNING ON http://localhost:${PORT}`)
-            console.log(`TEST WITH: POST /users with {email, password, ....}`)
         })
     }).catch((err) => {
         console.log(`Failed to initialize database::`, err)
