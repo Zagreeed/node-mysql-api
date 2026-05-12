@@ -1,3 +1,4 @@
+import 'mysql2';
 import config from "../../config.prod.json"
 import mysql from "mysql2/promise"
 import { Sequelize } from "sequelize"
