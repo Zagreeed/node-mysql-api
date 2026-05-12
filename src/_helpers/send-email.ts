@@ -1,8 +1,8 @@
 import nodemailer from "nodemailer"
 import config from "../../config.prod.json"
-import { Resend } from 'resend';
+// import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 // ADD "from = config.emailform" to the parameter for SMTP EMAIL LIKE ETHEREAL 
