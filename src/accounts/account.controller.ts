@@ -225,7 +225,7 @@ function setTokenCookie(res: any, token: any) {
         httpOnly: true,
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
         secure: true,
-        sameSite: 'lax'
+        sameSite: 'none' as const
     };
     res.cookie('refreshToken', token, cookieOptions);
 }
