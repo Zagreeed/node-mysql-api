@@ -1,5 +1,5 @@
 import 'mysql2';
-import config from "../../config.prod.json"
+// import config from "../../config.prod.json"
 import mysql from "mysql2/promise"
 import { Sequelize } from "sequelize"
 
@@ -12,7 +12,11 @@ export interface Database {
 export const db: Database = {} as Database;
 
 export async function initialize(): Promise<void> {
-    const { host, port, user, password, database } = config.database
+    const host = process.env.DB_HOST ?? '';
+    const port = Number(process.env.DB_PORT ?? 3306);
+    const user = process.env.DB_USER ?? '';
+    const password = process.env.DB_PASSWORD ?? '';
+    const database = process.env.DB_NAME ?? '';
 
     // ↓ Add ssl to the raw mysql2 connection
     const connection = await mysql.createConnection({

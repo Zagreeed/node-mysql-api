@@ -1,13 +1,14 @@
 import { expressjwt } from 'express-jwt';
-import config from '../../config.prod.json';
+// import config from '../../config.prod.json';
 import { db } from '../_helpers/db';
 
-const { secret } = config;
 
 export default function authorize(roles: any = []) {
     if (typeof roles === 'string') {
         roles = [roles];
     }
+
+    const secret = process.env.JWT_SECRET ?? '';
 
     return [
         expressjwt({ secret, algorithms: ['HS256'] }),
