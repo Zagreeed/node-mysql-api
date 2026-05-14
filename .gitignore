@@ -14,3 +14,5 @@ Thumbs.db
 
 # Log files
 npm-debug.log*
+
+config.prod.json
