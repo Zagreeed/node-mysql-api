@@ -18,16 +18,18 @@ export default async function sendEmail({ to, subject, html, from = process.env.
 
 
     // THE CODE BELOW ARE USED FOR RESEND EMAILL
-    const sandboxTo = process.env.RESEND_VERIFIED_EMAIL ?? to;
-    const finalSubject = sandboxTo !== to
-        ? `[→ ${to}] ${subject}`
-        : subject;
+
+
+    // const sandboxTo = process.env.RESEND_VERIFIED_EMAIL ?? to;
+    // const finalSubject = sandboxTo !== to
+    //     ? `[→ ${to}] ${subject}`
+    //     : subject;
 
 
     const { data, error } = await resend.emails.send({
         from,
-        to: sandboxTo,
-        subject: finalSubject,
+        to,
+        subject,
         html
     });
 
